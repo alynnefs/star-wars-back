@@ -5,9 +5,6 @@ from flask import Flask
 app = Flask(__name__)
 
 
-# TODO: adicionar `get_` nas rotas
-
-
 @app.route("/")
 def hello_world():
     # TODO: fazer tela padrão
@@ -15,7 +12,7 @@ def hello_world():
 
 
 @app.route("/people/<name>", methods=["GET"])
-def people(name):
+def get_people(name):
     # TODO: generalizar url_base
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/people?search={name}")
@@ -24,7 +21,7 @@ def people(name):
 
 
 @app.route("/films/<name>", methods=["GET"])
-def films(name):
+def get_films(name):
     from app.recommendations import find_recommendations
 
     # TODO: generalizar url_base
@@ -38,7 +35,7 @@ def films(name):
 
 
 @app.route("/planets/<name>", methods=["GET"])
-def planets(name):
+def get_planets(name):
     # TODO: generalizar url_base
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/planets?search={name}")
@@ -47,7 +44,7 @@ def planets(name):
 
 
 @app.route("/starships/<name>", methods=["GET"])
-def starships(name):
+def get_starships(name):
     # TODO: generalizar url_base
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/starships?search={name}")
@@ -56,19 +53,19 @@ def starships(name):
 
 
 @app.route("/all/<name>", methods=["GET"])
-def all_items(name):
+def get_all_items(name):
     # TODO: generalizar url_base
     url_base = "https://swapi.dev/api"
-    list_people = people(name)
-    list_films = films(name)
-    list_planets = planets(name)
-    list_starships = starships(name)
+    list_people = get_people(name)
+    list_films = get_films(name)
+    list_planets = get_planets(name)
+    list_starships = get_starships(name)
 
     return list_people + list_films + list_planets + list_starships
 
 
 @app.route("/people/<people_id>", methods=["GET"])
-def people_id(people_id):
+def get_people_by_id(people_id):
     # TODO: generalizar url_base
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/people/{people_id}")
