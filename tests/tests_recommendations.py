@@ -15,6 +15,15 @@ def test_get_people():
     assert people["name"] == "R5-D4"
 
 
+def test_get_recommendations_for_people():
+    response = get_people("luke")
+
+    recommendations = response[0].get("recommendations")
+    assert recommendations[0]["title"] == "A New Hope"
+    assert recommendations[1]["title"] == "The Empire Strikes Back"
+    assert recommendations[2]["title"] == "Return of the Jedi"
+
+
 def test_get_films():
     response = get_films("A New Hope")
     film = response[0].get("item")
