@@ -41,7 +41,32 @@ def test_get_more_than_one_film():
 
 
 def test_recommendations_for_more_than_one_film():
-    ...
+    films = get_films("the")
+
+    film_recommendations_0 = films[0]["recommendations"]
+    assert film_recommendations_0[0]["name"] == "Luke Skywalker"
+    assert film_recommendations_0[1]["name"] == "C-3PO"
+    assert film_recommendations_0[2]["name"] == "R2-D2"
+
+    film_recommendations_1 = films[1]["recommendations"]
+    assert film_recommendations_1[0]["name"] == "Luke Skywalker"
+    assert film_recommendations_1[1]["name"] == "C-3PO"
+    assert film_recommendations_1[2]["name"] == "R2-D2"
+
+    film_recommendations_2 = films[2]["recommendations"]
+    assert film_recommendations_2[0]["name"] == "C-3PO"
+    assert film_recommendations_2[1]["name"] == "R2-D2"
+    assert film_recommendations_2[2]["name"] == "Obi-Wan Kenobi"
+
+    film_recommendations_3 = films[3]["recommendations"]
+    assert film_recommendations_3[0]["name"] == "C-3PO"
+    assert film_recommendations_3[1]["name"] == "R2-D2"
+    assert film_recommendations_3[2]["name"] == "Owen Lars"
+
+    film_recommendations_4 = films[4]["recommendations"]
+    assert film_recommendations_4[0]["name"] == "Luke Skywalker"
+    assert film_recommendations_4[1]["name"] == "C-3PO"
+    assert film_recommendations_4[2]["name"] == "R2-D2"
 
 
 def test_get_planets():
