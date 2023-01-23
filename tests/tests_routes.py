@@ -1,48 +1,66 @@
 from app.main import (
-    people,
-    films,
-    planets,
-    starships,
-    all_items,
+    get_people,
+    get_films,
+    get_planets,
+    get_starships,
+    get_all_items,
 )
+
+from app.recommendations import find_recommendations
 
 
 def test_get_people():
-    people_obtained = people("Luke")
-    assert people_obtained[0]["name"] == "Luke Skywalker"
+    response = get_people("Luke")
+    people = response.get("item")
+    assert people[0]["name"] == "Luke Skywalker"
 
 
 def test_get_films():
-    films_obtained = films("A New Hope")
-    assert films_obtained[0]["title"] == "A New Hope"
+    response = get_films("A New Hope")
+    films = response.get("item")
+    assert films[0]["title"] == "A New Hope"
+
+
+def test_get_recommendations_for_film():
+    response = get_films("A New Hope")
+    recommendations = response.get("recommendations")
+
+    assert recommendations[0]["name"] == "Luke Skywalker"
+    assert recommendations[1]["name"] == "C-3PO"
+    assert recommendations[2]["name"] == "R2-D2"
 
 
 def test_get_more_than_one_film():
-    films_obtained = films("the")
-    assert films_obtained[0]["title"] == "The Empire Strikes Back"
-    assert films_obtained[1]["title"] == "Return of the Jedi"
-    assert films_obtained[2]["title"] == "The Phantom Menace"
-    assert films_obtained[3]["title"] == "Attack of the Clones"
-    assert films_obtained[4]["title"] == "Revenge of the Sith"
+    response = get_films("the")
+    films = response.get("item")
+
+    assert films[0]["title"] == "The Empire Strikes Back"
+    assert films[1]["title"] == "Return of the Jedi"
+    assert films[2]["title"] == "The Phantom Menace"
+    assert films[3]["title"] == "Attack of the Clones"
+    assert films[4]["title"] == "Revenge of the Sith"
 
 
 def test_get_planets():
-    planets_obtained = planets("Naboo")
-    assert planets_obtained[0]["name"] == "Naboo"
+    response = get_planets("Naboo")
+    planets = response.get("item")
+    assert planets[0]["name"] == "Naboo"
 
 
 def test_get_starships():
-    starships_obtained = starships("Death Star")
-    assert starships_obtained[0]["name"] == "Death Star"
+    response = get_starships("Death Star")
+    starships = response.get("item")
+    assert starships[0]["name"] == "Death Star"
 
 
 def test_all_items():
-    items_obtained = all_items("naboo")
+    response = get_all_items("naboo")
+    items = response.get("item")
 
     # planet
-    assert items_obtained[0]["name"] == "Naboo"
+    assert items[0]["name"] == "Naboo"
 
     # starships
-    assert items_obtained[1]["name"] == "Naboo fighter"
-    assert items_obtained[2]["name"] == "Naboo Royal Starship"
-    assert items_obtained[3]["name"] == "Naboo star skiff"
+    assert items[1]["name"] == "Naboo fighter"
+    assert items[2]["name"] == "Naboo Royal Starship"
+    assert items[3]["name"] == "Naboo star skiff"

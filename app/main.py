@@ -17,7 +17,7 @@ def get_people(name):
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/people?search={name}")
     data = response.json()
-    return data.get("results")
+    return {"item": data.get("results")}
 
 
 @app.route("/films/<name>", methods=["GET"])
@@ -40,7 +40,7 @@ def get_planets(name):
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/planets?search={name}")
     data = response.json()
-    return data.get("results")
+    return {"item": data.get("results")}
 
 
 @app.route("/starships/<name>", methods=["GET"])
@@ -49,19 +49,29 @@ def get_starships(name):
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/starships?search={name}")
     data = response.json()
-    return data.get("results")
+    return {"item": data.get("results")}
 
 
 @app.route("/all/<name>", methods=["GET"])
 def get_all_items(name):
     # TODO: generalizar url_base
+    # TODO: para cada item encontrado, 3 recomendações?
+    response = []
     url_base = "https://swapi.dev/api"
-    list_people = get_people(name)
-    list_films = get_films(name)
-    list_planets = get_planets(name)
-    list_starships = get_starships(name)
 
-    return list_people + list_films + list_planets + list_starships
+    people = get_people(name)
+    films = get_films(name)
+    planets = get_planets(name)
+    starships = get_starships(name)
+
+    response = (
+        people.get("item")
+        + films.get("item")
+        + planets.get("item")
+        + starships.get("item")
+    )
+
+    return {"item": response}
 
 
 @app.route("/people/<people_id>", methods=["GET"])
