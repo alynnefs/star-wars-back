@@ -11,28 +11,52 @@ def get_items(sub_url: str) -> Dict:
     return data
 
 
-def find_characters(characters: List) -> List:
-    from app.main import get_people_by_id
+def get_item_by_link(link):
+    response = requests.get(link)
+    data = response.json()
 
-    character1_id = characters[0].split("/")[-2]
-    character1 = get_people_by_id(character1_id)
-
-    character2_id = characters[1].split("/")[-2]
-    character2 = get_people_by_id(character2_id)
-
-    character3_id = characters[2].split("/")[-2]
-    character3 = get_people_by_id(character3_id)
-
-    return [character1, character2, character3]
+    return data
 
 
-def find_recommendations(items: List[Dict]) -> List:
+def find_items(count, items: List) -> List:
+    recommendations = []
+    for item in items:
+        if count >= 3:
+            break
+
+        recommendations.append(get_item_by_link(item))
+        count += 1
+
+    return count, recommendations
+
+
+def find_recommendations(items: List[Dict]) -> List[Dict]:
     recommendations_per_item = []
     for item in items:
+        count = 0
+
         recommendations = []
-        characters = item.get("characters")
-        if characters:
-            recommendations = find_characters(characters)
+        if item.get("characters"):
+            count, recommendations = find_items(count, item.get("characters"))
+
+        if count < 3 and item.get("films"):
+            count, recommendations = find_items(count, item.get("films"))
+
+        if count < 3 and item.get("starships"):
+            count, recommendations = find_items(count, item.get("films"))
+
+        if count < 3 and item.get("homeworld"):
+            count, recommendations = find_items(count, item.get("films"))
+
+        if count < 3 and item.get("starship_class"):
+            count, recommendations = find_items(count, item.get("films"))
+
+        if count < 3 and item.get("manufacturer"):
+            count, recommendations = find_items(count, item.get("films"))
+
+        if count < 3 and item.get("residents"):
+            count, recommendations = find_items(count, item.get("films"))
+
         recommendations_per_item.append(
             {"item": item, "recommendations": recommendations}
         )

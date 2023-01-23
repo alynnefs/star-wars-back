@@ -10,9 +10,9 @@ from app.recommendations import find_recommendations
 
 
 def test_get_people():
-    response = get_people("Luke")
-    people = response.get("item")
-    assert people[0]["name"] == "Luke Skywalker"
+    response = get_people("R5-D4")
+    people = response[0].get("item")
+    assert people["name"] == "R5-D4"
 
 
 def test_get_films():

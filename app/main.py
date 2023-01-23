@@ -1,6 +1,6 @@
 from flask import Flask
 
-from app.recommendations import get_items
+from app.recommendations import get_items, find_recommendations
 
 app = Flask(__name__)
 
@@ -16,18 +16,17 @@ def get_people(name):
     sub_url = f"people?search={name}"
     data = get_items(sub_url)
 
-    return {"item": data.get("results")}
+    recommendations_per_item = find_recommendations(data.get("results"))
+
+    return recommendations_per_item or {"item": []}
 
 
 @app.route("/films/<name>", methods=["GET"])
 def get_films(name):
-    from app.recommendations import find_recommendations
-
     sub_url = f"films?search={name}"
     data = get_items(sub_url)
-    results = data.get("results")
 
-    recommendations_per_item = find_recommendations(results)
+    recommendations_per_item = find_recommendations(data.get("results"))
 
     return recommendations_per_item or {"item": []}
 
