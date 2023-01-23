@@ -27,8 +27,9 @@ def get_films(name):
     data = get_items(sub_url)
     results = data.get("results")
 
-    recommendations = find_recommendations(results)
-    return {"item": results, "recommendations": recommendations}
+    recommendations_per_item = find_recommendations(results)
+
+    return recommendations_per_item or {"item": []}
 
 
 @app.route("/planets/<name>", methods=["GET"])

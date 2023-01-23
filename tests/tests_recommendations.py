@@ -17,13 +17,13 @@ def test_get_people():
 
 def test_get_films():
     response = get_films("A New Hope")
-    films = response.get("item")
-    assert films[0]["title"] == "A New Hope"
+    film = response[0].get("item")
+    assert film["title"] == "A New Hope"
 
 
 def test_get_recommendations_for_film():
     response = get_films("A New Hope")
-    recommendations = response.get("recommendations")
+    recommendations = response[0].get("recommendations")
 
     assert recommendations[0]["name"] == "Luke Skywalker"
     assert recommendations[1]["name"] == "C-3PO"
@@ -31,14 +31,17 @@ def test_get_recommendations_for_film():
 
 
 def test_get_more_than_one_film():
-    response = get_films("the")
-    films = response.get("item")
+    films = get_films("the")
 
-    assert films[0]["title"] == "The Empire Strikes Back"
-    assert films[1]["title"] == "Return of the Jedi"
-    assert films[2]["title"] == "The Phantom Menace"
-    assert films[3]["title"] == "Attack of the Clones"
-    assert films[4]["title"] == "Revenge of the Sith"
+    assert films[0]["item"]["title"] == "The Empire Strikes Back"
+    assert films[1]["item"]["title"] == "Return of the Jedi"
+    assert films[2]["item"]["title"] == "The Phantom Menace"
+    assert films[3]["item"]["title"] == "Attack of the Clones"
+    assert films[4]["item"]["title"] == "Revenge of the Sith"
+
+
+def test_recommendations_for_more_than_one_film():
+    ...
 
 
 def test_get_planets():

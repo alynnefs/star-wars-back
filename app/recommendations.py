@@ -1,7 +1,8 @@
 import requests
+from typing import List, Dict
 
 
-def get_items(sub_url: str):
+def get_items(sub_url: str) -> Dict:
     # TODO: resolver para mais de um item obtido
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/{sub_url}")
@@ -10,7 +11,7 @@ def get_items(sub_url: str):
     return data
 
 
-def find_characters(characters):
+def find_characters(characters: List) -> List:
     from app.main import get_people_by_id
 
     character1_id = characters[0].split("/")[-2]
@@ -25,10 +26,15 @@ def find_characters(characters):
     return [character1, character2, character3]
 
 
-def find_recommendations(items):
-    recommendations = []
+def find_recommendations(items: List[Dict]) -> List:
+    recommendations_per_item = []
     for item in items:
+        recommendations = []
         characters = item.get("characters")
         if characters:
             recommendations = find_characters(characters)
-    return recommendations
+        recommendations_per_item.append(
+            {"item": item, "recommendations": recommendations}
+        )
+
+    return recommendations_per_item
