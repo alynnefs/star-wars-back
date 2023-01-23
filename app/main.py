@@ -1,6 +1,6 @@
-import requests
-
 from flask import Flask
+
+from app.recommendations import get_items
 
 app = Flask(__name__)
 
@@ -13,10 +13,9 @@ def hello_world():
 
 @app.route("/people/<name>", methods=["GET"])
 def get_people(name):
-    # TODO: generalizar url_base
-    url_base = "https://swapi.dev/api"
-    response = requests.get(f"{url_base}/people?search={name}")
-    data = response.json()
+    sub_url = f"people?search={name}"
+    data = get_items(sub_url)
+
     return {"item": data.get("results")}
 
 
@@ -24,10 +23,8 @@ def get_people(name):
 def get_films(name):
     from app.recommendations import find_recommendations
 
-    # TODO: generalizar url_base
-    url_base = "https://swapi.dev/api"
-    response = requests.get(f"{url_base}/films?search={name}")
-    data = response.json()
+    sub_url = f"films?search={name}"
+    data = get_items(sub_url)
     results = data.get("results")
 
     recommendations = find_recommendations(results)
@@ -36,28 +33,24 @@ def get_films(name):
 
 @app.route("/planets/<name>", methods=["GET"])
 def get_planets(name):
-    # TODO: generalizar url_base
-    url_base = "https://swapi.dev/api"
-    response = requests.get(f"{url_base}/planets?search={name}")
-    data = response.json()
+    sub_url = f"planets?search={name}"
+    data = get_items(sub_url)
+
     return {"item": data.get("results")}
 
 
 @app.route("/starships/<name>", methods=["GET"])
 def get_starships(name):
-    # TODO: generalizar url_base
-    url_base = "https://swapi.dev/api"
-    response = requests.get(f"{url_base}/starships?search={name}")
-    data = response.json()
+    sub_url = f"starships?search={name}"
+    data = get_items(sub_url)
+
     return {"item": data.get("results")}
 
 
 @app.route("/all/<name>", methods=["GET"])
 def get_all_items(name):
-    # TODO: generalizar url_base
     # TODO: para cada item encontrado, 3 recomendações?
     response = []
-    url_base = "https://swapi.dev/api"
 
     people = get_people(name)
     films = get_films(name)
@@ -76,17 +69,15 @@ def get_all_items(name):
 
 @app.route("/people/<people_id>", methods=["GET"])
 def get_people_by_id(people_id):
-    # TODO: generalizar url_base
-    url_base = "https://swapi.dev/api"
-    response = requests.get(f"{url_base}/people/{people_id}")
-    data = response.json()
+    sub_url = f"people/{people_id}"
+    data = get_items(sub_url)
+
     return data
 
 
 @app.route("/films/<film_id>", methods=["GET"])
 def get_film_by_id(film_id):
-    # TODO: generalizar url_base
-    url_base = "https://swapi.dev/api"
-    response = requests.get(f"{url_base}/films/{film_id}")
-    data = response.json()
+    sub_url = f"films/{film_id}"
+    data = get_items(sub_url)
+
     return data

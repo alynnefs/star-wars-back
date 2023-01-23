@@ -1,3 +1,15 @@
+import requests
+
+
+def get_items(sub_url: str):
+    # TODO: resolver para mais de um item obtido
+    url_base = "https://swapi.dev/api"
+    response = requests.get(f"{url_base}/{sub_url}")
+    data = response.json()
+
+    return data
+
+
 def find_characters(characters):
     from app.main import get_people_by_id
 
