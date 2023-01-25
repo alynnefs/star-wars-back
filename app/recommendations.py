@@ -19,6 +19,9 @@ def get_item_by_link(link):
 
 
 def find_items(count, items: List) -> List:
+    """
+    get 3 items, probably will be erased
+    """
     recommendations = []
     for item in items:
         if count >= 3:
@@ -30,32 +33,95 @@ def find_items(count, items: List) -> List:
     return count, recommendations
 
 
-def find_recommendations(items: List[Dict]) -> List[Dict]:
+def find_recommendations_starships(items: List) -> List:
+    # TODO: check cases with less than 3 recommendations
     recommendations_per_item = []
     for item in items:
         count = 0
-
         recommendations = []
-        if item.get("characters"):
-            count, recommendations = find_items(count, item.get("characters"))
 
-        if count < 3 and item.get("films"):
-            count, recommendations = find_items(count, item.get("films"))
+        url_film = item.get("films")[0]
+        film = get_item_by_link(url_film)
+        url_starships = film.get("starships")
 
-        if count < 3 and item.get("starships"):
-            count, recommendations = find_items(count, item.get("films"))
+        for url in url_starships:
+            if count == 3:
+                break
+            if url != item.get("url"):
+                starship = get_item_by_link(url)
+                recommendations.append(starship)
+                count += 1
 
-        if count < 3 and item.get("homeworld"):
-            count, recommendations = find_items(count, item.get("films"))
+        recommendations_per_item.append(
+            {"item": item, "recommendations": recommendations}
+        )
+    return recommendations_per_item
 
-        if count < 3 and item.get("starship_class"):
-            count, recommendations = find_items(count, item.get("films"))
 
-        if count < 3 and item.get("manufacturer"):
-            count, recommendations = find_items(count, item.get("films"))
+def find_recommendations_people(items: List[Dict]) -> List[Dict]:
+    recommendations_per_item = []
+    for item in items:
+        count = 0
+        recommendations = []
 
-        if count < 3 and item.get("residents"):
-            count, recommendations = find_items(count, item.get("films"))
+        url_film = item.get("films")[0]
+        film = get_item_by_link(url_film)
+        url_characters = film.get("characters")
+
+        for url in url_characters:
+            if count == 3:
+                break
+            if url != item.get("url"):
+                character = get_item_by_link(url)
+                recommendations.append(character)
+                count += 1
+
+        recommendations_per_item.append(
+            {"item": item, "recommendations": recommendations}
+        )
+    return recommendations_per_item
+
+
+def find_recommendations_film(items: List[Dict]) -> List[Dict]:
+    recommendations_per_item = []
+    for item in items:
+        count = 0
+        recommendations = []
+
+        url_character = item.get("characters")[0]
+        character = get_item_by_link(url_character)
+        url_films = character.get("films")
+        for url in url_films:
+            if count == 3:
+                break
+            if url != item.get("url"):
+                film = get_item_by_link(url)
+                recommendations.append(film)
+                count += 1
+
+        recommendations_per_item.append(
+            {"item": item, "recommendations": recommendations}
+        )
+    return recommendations_per_item
+
+
+def find_recommendations_planets(items: List[Dict]) -> List[Dict]:
+    recommendations_per_item = []
+    for item in items:
+        count = 0
+        recommendations = []
+
+        url_film = item.get("films")[0]
+        film = get_item_by_link(url_film)
+        url_planets = film.get("planets")
+
+        for url in url_planets:
+            if count == 3:
+                break
+            if url != item.get("url"):
+                character = get_item_by_link(url)
+                recommendations.append(character)
+                count += 1
 
         recommendations_per_item.append(
             {"item": item, "recommendations": recommendations}
