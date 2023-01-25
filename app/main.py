@@ -86,19 +86,3 @@ def get_all_items(name):
         response += starships
 
     return response or default_response
-
-
-@app.route("/people/<people_id>", methods=["GET"])
-def get_people_by_id(people_id):
-    sub_url = f"people/{people_id}"
-    data = get_items(sub_url)
-
-    return data
-
-
-@app.route("/films/<film_id>", methods=["GET"])
-def get_film_by_id(film_id):
-    sub_url = f"films/{film_id}"
-    data = get_items(sub_url)
-
-    return data
