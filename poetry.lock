@@ -72,6 +72,17 @@ optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 
 [[package]]
+name = "coverage"
+version = "7.0.5"
+description = "Code coverage measurement for Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+toml = ["tomli"]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.1.0"
 description = "Backport of PEP 654 (exception groups)"
@@ -327,7 +338,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-co
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "d48b2879b95478da4f6b2becfb52c7623a89d042adebc767c06ae4df6c329230"
+content-hash = "952b5ebed82a943035b70084e5cdf57a3e1c8b855e60bffb27274daba8c7235f"
 
 [metadata.files]
 attrs = []
@@ -336,6 +347,7 @@ certifi = []
 charset-normalizer = []
 click = []
 colorama = []
+coverage = []
 exceptiongroup = []
 flask = []
 flask-cors = []
