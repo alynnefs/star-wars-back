@@ -3,7 +3,6 @@ from typing import List, Dict
 
 
 def get_items(sub_url: str) -> Dict:
-    # TODO: resolver para mais de um item obtido
     url_base = "https://swapi.dev/api"
     response = requests.get(f"{url_base}/{sub_url}")
     data = response.json()
@@ -19,7 +18,6 @@ def get_item_by_link(link):
 
 
 def find_recommendations_starships(items: List) -> List:
-    # TODO: check cases with less than 3 recommendations
     recommendations_per_item = []
     for item in items:
         count = 0
