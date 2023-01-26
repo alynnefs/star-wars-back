@@ -15,12 +15,6 @@ CORS(app, support_credentials=True)
 default_response = [{"item": [], "recommendations": []}]
 
 
-@app.route("/")
-def hello_world():
-    # TODO: fazer tela padrão
-    return "<p>Hello, World!</p>"
-
-
 @app.route("/people/<name>", methods=["GET"])
 def get_people(name):
     sub_url = f"people?search={name}"
