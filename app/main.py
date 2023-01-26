@@ -20,9 +20,7 @@ def get_people(name):
     sub_url = f"people?search={name}"
     data = get_items(sub_url)
 
-    recommendations_per_item = find_recommendations_people(data.get("results"))
-
-    return recommendations_per_item or default_response
+    return find_recommendations_people(data.get("results")) or default_response
 
 
 @app.route("/films/<name>", methods=["GET"])
@@ -30,9 +28,7 @@ def get_films(name):
     sub_url = f"films?search={name}"
     data = get_items(sub_url)
 
-    recommendations_per_item = find_recommendations_film(data.get("results"))
-
-    return recommendations_per_item or default_response
+    return find_recommendations_film(data.get("results")) or default_response
 
 
 @app.route("/planets/<name>", methods=["GET"])
@@ -40,9 +36,7 @@ def get_planets(name):
     sub_url = f"planets?search={name}"
     data = get_items(sub_url)
 
-    recommendations_per_item = find_recommendations_planets(data.get("results"))
-
-    return recommendations_per_item or default_response
+    return find_recommendations_planets(data.get("results")) or default_response
 
 
 @app.route("/starships/<name>", methods=["GET"])
@@ -50,9 +44,7 @@ def get_starships(name):
     sub_url = f"starships?search={name}"
     data = get_items(sub_url)
 
-    recommendations_per_item = find_recommendations_starships(data.get("results"))
-
-    return recommendations_per_item or default_response
+    return find_recommendations_starships(data.get("results")) or default_response
 
 
 @app.route("/all/<name>", methods=["GET"])
