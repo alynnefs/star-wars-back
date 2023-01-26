@@ -18,21 +18,6 @@ def get_item_by_link(link):
     return data
 
 
-def find_items(count, items: List) -> List:
-    """
-    get 3 items, probably will be erased
-    """
-    recommendations = []
-    for item in items:
-        if count >= 3:
-            break
-
-        recommendations.append(get_item_by_link(item))
-        count += 1
-
-    return count, recommendations
-
-
 def find_recommendations_starships(items: List) -> List:
     # TODO: check cases with less than 3 recommendations
     recommendations_per_item = []
