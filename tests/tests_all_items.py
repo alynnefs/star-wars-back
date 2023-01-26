@@ -19,6 +19,9 @@ def test_all_items():
 
 
 def test_get_recommendations_for_all_items():
+    """
+    planet and starships
+    """
     response = get_all_items("naboo")
 
     # planet
@@ -42,3 +45,28 @@ def test_get_recommendations_for_all_items():
     assert recommendations_3[0]["name"] == "CR90 corvette"
     assert recommendations_3[1]["name"] == "Droid control ship"
     assert recommendations_3[2]["name"] == "Jedi starfighter"
+
+
+def test_all_items_people_and_recommendations():
+    response = get_all_items("R2-D2")
+
+    items = response[0].get("item")
+    assert items["name"] == "R2-D2"
+
+    recommendations = response[0].get("recommendations")
+
+    assert recommendations[0]["name"] == "Luke Skywalker"
+    assert recommendations[1]["name"] == "C-3PO"
+    assert recommendations[2]["name"] == "Darth Vader"
+
+
+def test_all_items_film_and_recommendations():
+    response = get_all_items("A New Hope")
+
+    items = response[0].get("item")
+    assert items["title"] == "A New Hope"
+
+    recommendations = response[0].get("recommendations")
+    assert recommendations[0]["title"] == "The Empire Strikes Back"
+    assert recommendations[1]["title"] == "Return of the Jedi"
+    assert recommendations[2]["title"] == "Revenge of the Sith"
