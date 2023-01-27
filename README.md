@@ -32,10 +32,11 @@ Para ver se o container está sendo executado, basta usar o comando `docker cont
 
 ### Especificações usadas no desenvolvimento
 
-Sistema operacional: Ubuntu 20.04.5 LTS
-NPM: 9.2.0
-Docker: 20.10.21, build baeda1f
-Vue/cli: 5.0.8
+- Sistema operacional: Ubuntu 20.04.5 LTS
+- Docker: 20.10.21, build baeda1f
+- Python: 3.9
+- NPM: 9.2.0
+- Vue/cli: 5.0.8
 
 
 ### Como executar
