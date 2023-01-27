@@ -1,6 +1,6 @@
 [![Build Status](https://app.travis-ci.com/alynnefs/star-wars-back.svg?branch=main)](https://app.travis-ci.com/alynnefs/star-wars-back)
 
-# Star Wars API
+# Star Wars API (back)
 
 O projeto consiste em buscar um elemento e três recomendações de acordo com a pesquisa feita. Caso mais de um elemento seja encontrado, terá três recomendações para cada um deles.
 
@@ -132,7 +132,7 @@ O resultado será:
 
 > Lembrando que, por causa das requisições, os testes irão demorar um pouco
 
-Este comando irá executar todos os testes de todos os arquivos que esão dentro desta pasta. Por fazer requisições ao SWAPI, vai demorar mais do que o desejado. Sendo assim, caso queira executar apenas um dos testes, você pode usar este comando como exemplo:
+Este comando irá executar todos os testes de todos os arquivos que estão dentro desta pasta. Por fazer requisições ao SWAPI, vai demorar mais do que o desejado. Sendo assim, caso queira executar apenas um dos testes, você pode usar este comando como exemplo:
 
 ```
 pytest tests/tests_films.py::test_get_films
