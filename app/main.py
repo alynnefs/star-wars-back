@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 
 from app.recommendations import (
@@ -12,47 +12,67 @@ from app.recommendations import (
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-default_response = [{"item": [], "recommendations": []}]
+default_response = []
 
 
+@app.route("/people/", methods=["GET"])
 @app.route("/people/<name>", methods=["GET"])
-def get_people(name):
+def get_people(name=""):
+    if not name:
+        return default_response
+
     sub_url = f"people?search={name}"
     data = get_items(sub_url)
 
     return find_recommendations_people(data.get("results")) or default_response
 
 
+@app.route("/films/", methods=["GET"])
 @app.route("/films/<name>", methods=["GET"])
-def get_films(name):
+def get_films(name=""):
+    if not name:
+        return default_response
+
     sub_url = f"films?search={name}"
     data = get_items(sub_url)
 
     return find_recommendations_film(data.get("results")) or default_response
 
 
+@app.route("/planets/", methods=["GET"])
 @app.route("/planets/<name>", methods=["GET"])
-def get_planets(name):
+def get_planets(name=""):
+    if not name:
+        return default_response
+
     sub_url = f"planets?search={name}"
     data = get_items(sub_url)
 
     return find_recommendations_planets(data.get("results")) or default_response
 
 
+@app.route("/starships/", methods=["GET"])
 @app.route("/starships/<name>", methods=["GET"])
-def get_starships(name):
+def get_starships(name=""):
+    if not name:
+        return default_response
+
     sub_url = f"starships?search={name}"
     data = get_items(sub_url)
 
     return find_recommendations_starships(data.get("results")) or default_response
 
 
+@app.route("/all/", methods=["GET"])
 @app.route("/all/<name>", methods=["GET"])
-def get_all_items(name):
+def get_all_items(name=""):
     """
     Get all items that fit the pattern.
     It can have more than one type of item.
     """
+    if not name:
+        return default_response
+
     response = []
 
     people = get_people(name)
@@ -62,13 +82,13 @@ def get_all_items(name):
 
     # The += is used to sum the items within the list,
     # not the entire list
-    if people[0].get("item"):
+    if people:
         response += people
-    if films[0].get("item"):
+    if films:
         response += films
-    if planets[0].get("item"):
+    if planets:
         response += planets
-    if starships[0].get("item"):
+    if starships:
         response += starships
 
     return response or default_response
