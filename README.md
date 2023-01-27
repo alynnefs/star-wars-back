@@ -30,6 +30,14 @@ Para ver se o container está sendo executado, basta usar o comando `docker cont
 
 ## Executando localmente
 
+### Especificações usadas no desenvolvimento
+
+Sistema operacional: Ubuntu 20.04.5 LTS
+NPM: 9.2.0
+Docker: 20.10.21, build baeda1f
+Vue/cli: 5.0.8
+
+
 ### Como executar
 
 Para criar o ambiente virtual, execute:
@@ -74,6 +82,7 @@ O retorno deverá ser:
 ![](https://i.imgur.com/ENxJRCU.jpg)
 
 
+
 Caso você não saiba em qual categoria sua pesquisa se encaixa, você pode pesquisar em todas. Por exemplo, "R2-D2" e "all".
 
 ![](https://i.imgur.com/TmRDjxg.jpg)
@@ -103,7 +112,6 @@ Para ver os testes que foram executados no Travis, basta clicar [neste link](htt
 
 ![](https://i.imgur.com/qrCNrZs.png)
 
-
 Caso ocorra algum erro, ele informa qual é. Por exemplo, quando mudei do poetry para o pip, esqueci de mudar o `.travis.yml`. O resultado foi esse:
 
 ![](https://i.imgur.com/qK0vQu4.png)
@@ -117,11 +125,21 @@ Considerando que você está no ambiente virtual e com as dependências instalad
 pytest tests/*
 ```
 
+O resultado será:
+
+![](https://i.imgur.com/VL0mMIO.png)
+
+> Lembrando que, por causa das requisições, os testes irão demorar um pouco
+
 Este comando irá executar todos os testes de todos os arquivos que esão dentro desta pasta. Por fazer requisições ao SWAPI, vai demorar mais do que o desejado. Sendo assim, caso queira executar apenas um dos testes, você pode usar este comando como exemplo:
 
 ```
 pytest tests/tests_films.py::test_get_films
 ```
+
+O resultado será:
+
+![](https://i.imgur.com/Smff2sU.png)
 
 ### Cobertura de testes
 
