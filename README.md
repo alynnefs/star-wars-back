@@ -73,24 +73,23 @@ No navegador, entre no link http://127.0.0.1:8080. O último número do IP pode 
 
 Você pode pesquisar pelo nome de um personagem, planeta, nave ou filme e selecionar se quer fazer uma pesquisa específica, por exemplo "Leia" e "people".
 
-![](https://i.imgur.com/XN0EfTe.jpg)
+![image](https://user-images.githubusercontent.com/17454743/215167527-ae3e047d-c348-411d-a116-985db73193b6.png)
 
 > O tempo de resposta está alto, tem uma sugestão de melhoria no fim do documento.
-> A legibilidade não está tão boa. Caso sobre tempo, irei melhorar isso.
 
 O retorno deverá ser:
 
-![](https://i.imgur.com/ENxJRCU.jpg)
+![image](https://user-images.githubusercontent.com/17454743/215167656-32f8b63c-b089-4d22-8a4e-e28432786df6.png)
 
 
 
 Caso você não saiba em qual categoria sua pesquisa se encaixa, você pode pesquisar em todas. Por exemplo, "R2-D2" e "all".
 
-![](https://i.imgur.com/TmRDjxg.jpg)
+![image](https://user-images.githubusercontent.com/17454743/215167787-6dd5afb5-ba5b-461b-816b-f062a855c9cb.png)
 
 O retorno deverá ser:
 
-![](https://i.imgur.com/8j5cs75.jpg)
+![image](https://user-images.githubusercontent.com/17454743/215167907-75025675-9334-4de9-ba00-6602bd7bc059.png)
 
 
 ### Usando o cURL
